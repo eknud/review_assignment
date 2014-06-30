@@ -18,16 +18,17 @@
 #------------------------
 # Control parameters:
 #------------------------
-filepath <- "choose"
+
+input.filename <- "FacultyReviewTest.csv"
+output.filename <- "FacultyReviewAssigned.csv"
+directory <- "C:/Users/grego_000/Downloads"
+
 tolerance <- 2 
 max.tries <- 5e6
 seed <- NULL
 
-# filepath -- Set to "choose" to select the CSV file to read in.
-# (Note that RStudio sometimes crashes with this.)
-# Otherwise set it to the absolute filepath of the CSV,
-# e.g. "C:/My Documents/applications.csv"
-# Note that forward slashes should be used in the filepath even on Windows.
+# filenames and directory -- should be straightforward.
+# Note that forward slashes should be used in the directory even on Windows.
 
 # tolerance -- set this to the maximum allowable difference in number of 
 # reviews between the mos-worked and least-worked institutions.
@@ -48,7 +49,7 @@ require(stringr)
 if (!is.null(seed)) set.seed(seed)
 
 raw <- read.csv(
-    file = ifelse(filepath == "choose", file.choose(), filepath),
+    file = paste(directory, input.filename, sep = "/"),
     stringsAsFactors = FALSE)
 
 # Some input checking
@@ -143,7 +144,7 @@ while (status$diff > tolerance) {
     to.change.col <- ifelse(to.change.i > nrow(raw), 5, 4)
     
     # To an under-represented reviewer
-    change.options <- status$counts[1:6]
+    change.options <- status$counts[1:4]
     # Can't change to something already in the row:
     change.options <- change.options[! names(change.options) %in% raw[to.change.row, 2:5]]
     # Can't change to a SC in the second column:
@@ -172,5 +173,5 @@ if (with(raw, any(cc == r1 | cc == r2 | sc == r1 | sc == r2 | r1 == r2))) {
 
 names(raw) <- c(original.names, "Reviewer 1", "Reviewer 2")
 write.csv(x = raw,
-          file = "assigned_reviewers.csv",
+          file = paste(directory, output.filename, sep = "/"),
           row.names = FALSE)
