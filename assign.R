@@ -87,9 +87,6 @@ if (any(! raw$sc %in% sc.all)) {
     stop(err)
 }
 
-n.each <- 2 * nrow(raw) / length(c(cc.all, sc.all)) 
-# n.each is the *total* number of reviews we want each
-# college to be assigned.
 # The first reviewer can be either CC or SC, the second reviewer will always
 # be SC.
 
@@ -161,7 +158,7 @@ while (status$diff > tolerance) {
     # Counter, just to reassure us it's still going
     # in case it takes a long time.
     counter <- counter + 1
-    if (counter %% 100 == 0) message(paste("Starting iteration"), counter)
+    if (counter %% 100 == 0) message(paste("Starting iteration", counter))
 }
 
 
