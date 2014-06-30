@@ -24,7 +24,7 @@ output.filename <- "FacultyReviewAssigned.csv"
 directory <- "C:/Users/grego_000/Downloads"
 
 tolerance <- 2 
-max.tries <- 5e6
+max.tries <- 1e5
 seed <- NULL
 
 # filenames and directory -- should be straightforward.
@@ -88,9 +88,6 @@ if (any(! raw$sc %in% sc.all)) {
     stop(err)
 }
 
-n.each <- 2 * nrow(raw) / length(c(cc.all, sc.all)) 
-# n.each is the *total* number of reviews we want each
-# college to be assigned.
 # The first reviewer can be either CC or SC, the second reviewer will always
 # be SC.
 
@@ -149,8 +146,9 @@ while (status$diff > tolerance) {
     change.options <- change.options[! names(change.options) %in% raw[to.change.row, 2:5]]
     # Can't change to a SC in the second column:
     if (to.change.col == 5) change.options <- setdiff(names(change.options), sc.all) 
-    if (length(a) == 0) { # If we got an unlucky draw, let's try again
+    if (length(change.options) == 0) { # If we got an unlucky draw, let's try again
         counter <- counter + 1
+        if (counter %% 100 == 0) message(paste("Starting iteration", counter))
         next
     }
     change.to <- sample(names(change.options), size = 1, prob = change.options)
@@ -162,7 +160,7 @@ while (status$diff > tolerance) {
     # Counter, just to reassure us it's still going
     # in case it takes a long time.
     counter <- counter + 1
-    if (counter %% 100 == 0) message(paste("Starting iteration"), counter)
+    if (counter %% 100 == 0) message(paste("Starting iteration", counter))
 }
 
 
@@ -173,5 +171,10 @@ if (with(raw, any(cc == r1 | cc == r2 | sc == r1 | sc == r2 | r1 == r2))) {
 
 names(raw) <- c(original.names, "Reviewer 1", "Reviewer 2")
 write.csv(x = raw,
+<<<<<<< HEAD
           file = paste(directory, output.filename, sep = "/"),
           row.names = FALSE)
+=======
+          file = "assigned_reviewers.csv",
+          row.names = FALSE)
+>>>>>>> 32da28f2285baf669e2d4ce850a3789f46604bbf
