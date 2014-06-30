@@ -145,7 +145,7 @@ while (status$diff > tolerance) {
     change.options <- change.options[! names(change.options) %in% raw[to.change.row, 2:5]]
     # Can't change to a SC in the second column:
     if (to.change.col == 5) change.options <- setdiff(names(change.options), sc.all) 
-    if (length(a) == 0) { # If we got an unlucky draw, let's try again
+    if (length(change.options) == 0) { # If we got an unlucky draw, let's try again
         counter <- counter + 1
         next
     }
