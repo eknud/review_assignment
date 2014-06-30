@@ -171,10 +171,5 @@ if (with(raw, any(cc == r1 | cc == r2 | sc == r1 | sc == r2 | r1 == r2))) {
 
 names(raw) <- c(original.names, "Reviewer 1", "Reviewer 2")
 write.csv(x = raw,
-<<<<<<< HEAD
           file = paste(directory, output.filename, sep = "/"),
           row.names = FALSE)
-=======
-          file = "assigned_reviewers.csv",
-          row.names = FALSE)
->>>>>>> 32da28f2285baf669e2d4ce850a3789f46604bbf
