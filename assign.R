@@ -20,7 +20,7 @@
 #------------------------
 filepath <- "choose"
 tolerance <- 2 
-max.tries <- 5e6
+max.tries <- 1e5
 seed <- NULL
 
 # filepath -- Set to "choose" to select the CSV file to read in.
@@ -147,6 +147,7 @@ while (status$diff > tolerance) {
     if (to.change.col == 5) change.options <- setdiff(names(change.options), sc.all) 
     if (length(change.options) == 0) { # If we got an unlucky draw, let's try again
         counter <- counter + 1
+        if (counter %% 100 == 0) message(paste("Starting iteration", counter))
         next
     }
     change.to <- sample(names(change.options), size = 1, prob = change.options)
