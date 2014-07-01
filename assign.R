@@ -21,7 +21,7 @@
 
 input.filename <- "FacultyReviewTest.csv"
 output.filename <- "FacultyReviewAssigned.csv"
-directory <- "C:/Users/grego_000/Downloads"
+directory <- "C:/Users/eknudsen/Desktop"
 
 tolerance <- 2 
 max.tries <- 1e5
@@ -145,7 +145,7 @@ while (status$diff > tolerance) {
     # Can't change to something already in the row:
     change.options <- change.options[! names(change.options) %in% raw[to.change.row, 2:5]]
     # Can't change to a SC in the second column:
-    if (to.change.col == 5) change.options <- setdiff(names(change.options), sc.all) 
+    if (to.change.col == 5) change.options <- change.options[setdiff(names(change.options), sc.all)]
     if (length(change.options) == 0) { # If we got an unlucky draw, let's try again
         counter <- counter + 1
         if (counter %% 100 == 0) message(paste("Starting iteration", counter))
