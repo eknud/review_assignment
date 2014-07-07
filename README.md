@@ -3,6 +3,8 @@ review_assignment
 
 Randomly assigning unbiased reviewers to transfer applications.
 
+Note (2014, Eric Knudsen): This forked software has been modified slightly from its original form.
+
 This software is released under the MIT License (below). Enjoy!
 
 The MIT License (MIT)

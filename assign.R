@@ -19,9 +19,9 @@
 # Control parameters:
 #------------------------
 
-input.filename <- "FacultyReviewTest.csv"
-output.filename <- "FacultyReviewAssigned.csv"
-directory <- "C:/Users/eknudsen/Desktop"
+input.filename <- "ReviewerInput.csv"
+output.filename <- "ReviewerOutput.csv"
+directory <- "C:/file/path/here"
 
 tolerance <- 2 
 max.tries <- 1e5
@@ -62,9 +62,9 @@ names(raw) <- c("id", "cc", "sc")
 raw$cc <- str_trim(raw$cc)
 raw$sc <- str_trim(raw$sc)
 
-cc.all <- c("BMCC", "Bronx", "Guttman", "Hostos",
-            "KBCC", "LaGuardia", "QBCC")
-sc.all <- c("Brooklyn", "City", "Hunter", "Lehman", "Queens")
+cc.all <- c("CC1", "CC2", "CC3", "CC4",
+            "CC5", "CC6", "CC7")
+sc.all <- c("SC1", "SC2", "SC3", "SC4", "SC5")
 sc.counts <- table(raw$sc)
 cc.counts <- table(raw$cc)
 
